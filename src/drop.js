@@ -1,7 +1,15 @@
 const dropped_files = [];
 
-export function init(load_url) {
+export function init() {
   const canvas = document.querySelector("canvas");
+
+  canvas.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  canvas.addEventListener("dragenter", (e) => {
+    e.preventDefault();
+  });
 
   canvas.addEventListener("drop", (e) => {
     e.preventDefault();
