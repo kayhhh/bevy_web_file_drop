@@ -6,12 +6,14 @@ mod plugin;
 
 use plugin::ExamplePlugin;
 
+// Native app
 fn main() {
     App::new()
         .add_plugins((DefaultPlugins, ExamplePlugin))
         .run();
 }
 
+// Web app
 #[wasm_bindgen(start)]
 fn start() {
     App::new()
