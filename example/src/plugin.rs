@@ -39,7 +39,11 @@ fn read_file_drops(
 ) {
     for event in events.read() {
         if let FileDragAndDrop::DroppedFile { path_buf, .. } = event {
+            #[cfg(target_family = "wasm")]
             let path = String::from(path_buf.to_str().unwrap());
+            #[cfg(not(target_family = "wasm"))]
+            let path = bevy::asset::AssetPath::from_path(path_buf.as_path());
+
             info!("Loading image: {}", path);
             active_image.0 = asset_server.load(path);
         }
