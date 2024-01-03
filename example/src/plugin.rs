@@ -1,30 +1,17 @@
-use bevy::{asset::AssetMetaCheck, prelude::*};
-use bevy_web_file_drop::WebFileDropPlugin;
-use wasm_bindgen::prelude::*;
+use bevy::prelude::*;
 
-#[wasm_bindgen(start)]
-fn start() {
-    App::new()
-        .insert_resource(AssetMetaCheck::Never)
-        .init_resource::<ActiveImage>()
-        .add_plugins((
-            // Plugin must be added before AssetPlugin (which is in DefaultPlugins)
-            WebFileDropPlugin,
-            DefaultPlugins.set(WindowPlugin {
-                primary_window: Some(Window {
-                    fit_canvas_to_parent: true,
-                    ..default()
-                }),
-                ..default()
-            }),
-        ))
-        .add_systems(Startup, setup)
-        .add_systems(Update, (read_file_drops, set_sprite))
-        .run();
+pub struct ExamplePlugin;
+
+impl Plugin for ExamplePlugin {
+    fn build(&self, app: &mut App) {
+        app.init_resource::<ActiveImage>()
+            .add_systems(Startup, setup)
+            .add_systems(Update, (read_file_drops, set_sprite));
+    }
 }
 
 #[derive(Resource, Default)]
-pub struct ActiveImage(Handle<Image>);
+struct ActiveImage(Handle<Image>);
 
 /// Spawn a camera and a sprite
 fn setup(
