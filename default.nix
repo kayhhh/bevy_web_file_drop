@@ -21,6 +21,14 @@ let
     LD_LIBRARY_PATH = lib.makeLibraryPath build_inputs;
   };
 in {
+  example = rustPlatform.buildRustPackage (common // {
+    pname = "example";
+    buildPhase = "trunk build --release";
+    installPhase = ''
+      mkdir -p $out/web
+      cp -r ./dist/* $out/web
+    '';
+  });
   lib =
     rustPlatform.buildRustPackage (common // { pname = "bevy_web_file_drop"; });
 }
