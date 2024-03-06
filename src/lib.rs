@@ -19,7 +19,7 @@ use wasm_bindgen::prelude::*;
 pub struct WebFileDropPlugin;
 
 impl Plugin for WebFileDropPlugin {
-    fn build(&self, app: &mut App) {
+    fn build(&self, _app: &mut App) {
         #[cfg(target_family = "wasm")]
         {
             use bevy_blob_loader::BlobLoaderPlugin;
