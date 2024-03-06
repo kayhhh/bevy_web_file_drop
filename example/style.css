@@ -1,7 +1,11 @@
 body {
   background-color: rgb(25.5, 25.5, 25.5);
-  height: 100vh;
+  height: 100%;
   margin: 0;
   overflow: hidden;
-  padding: 0;
+}
+
+canvas {
+  height: 100vh !important;
+  width: 100vw !important;
 }

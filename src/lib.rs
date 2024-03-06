@@ -13,16 +13,21 @@
 use std::path::Path;
 
 use bevy::prelude::*;
-use bevy_blob_loader::{path::serialize_url, BlobLoaderPlugin};
+use bevy_blob_loader::path::serialize_url;
 use wasm_bindgen::prelude::*;
 
 pub struct WebFileDropPlugin;
 
 impl Plugin for WebFileDropPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins(BlobLoaderPlugin)
-            .add_systems(Startup, init_js)
-            .add_systems(Update, read_dropped_files);
+        #[cfg(target_family = "wasm")]
+        {
+            use bevy_blob_loader::BlobLoaderPlugin;
+
+            app.add_plugins(BlobLoaderPlugin)
+                .add_systems(Startup, init_js)
+                .add_systems(Update, read_dropped_files);
+        }
     }
 }
 
@@ -46,14 +51,13 @@ fn read_dropped_files(
 
         info!("Got dropped {} file: {}", ext, url);
 
-        // Just use the first window
-        let window = windows.iter().next().expect("No windows found");
+        for window in windows.iter() {
+            // Convert the blob URL to a loadable path
+            let serialized = serialize_url(url, ext);
+            let path = Path::new(&serialized);
+            let path_buf = path.to_path_buf();
 
-        // Convert the blob URL to a loadable path
-        let serialized = serialize_url(url, ext);
-        let path = Path::new(&serialized);
-        let path_buf = path.to_path_buf();
-
-        writer.send(FileDragAndDrop::DroppedFile { window, path_buf });
+            writer.send(FileDragAndDrop::DroppedFile { window, path_buf });
+        }
     }
 }

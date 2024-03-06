@@ -13,7 +13,11 @@ export function init() {
 
   canvas.addEventListener("drop", (e) => {
     e.preventDefault();
-    e.stopPropagation();
+
+    if (e.dataTransfer.files.length == 0) {
+      console.warn("No files dropped");
+      return;
+    }
 
     const file = e.dataTransfer.files[0];
     const ext = file.name.split(".").pop();
