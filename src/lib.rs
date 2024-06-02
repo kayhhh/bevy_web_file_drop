@@ -4,8 +4,8 @@
 //!
 //! ## Usage
 //!
-//! After adding the plugin, you can use the same Bevy `FileDragAndDrop` events to read dropped files.
-//! The only difference is that the `path_buf` field of the `DroppedFile` event will be a blob URL instead of a local file path.
+//! After adding the plugin, you can use the same Bevy [FileDragAndDrop](bevy::window::FileDragAndDrop) events to read dropped files.
+//! The only difference is that the `path_buf` field of the [DroppedFile](bevy::window::FileDragAndDrop::DroppedFile) event will be a blob URL instead of a local file path.
 //! This blob URL will be loadable as a Bevy asset using [bevy_blob_loader](https://docs.rs/bevy_blob_loader/latest/bevy_blob_loader/).
 //!
 //! You might not have to change any code at all! Just add in the plugin and dropped files should work in both native and web builds.
