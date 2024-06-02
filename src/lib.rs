@@ -10,17 +10,17 @@
 //!
 //! You might not have to change any code at all! Just add in the plugin and dropped files should work in both native and web builds.
 
-use std::path::Path;
-
 use bevy::prelude::*;
-use bevy_blob_loader::path::serialize_url;
 use wasm_bindgen::prelude::*;
 
 pub struct WebFileDropPlugin;
 
 impl Plugin for WebFileDropPlugin {
-    fn build(&self, _app: &mut App) {
-        #[cfg(target_family = "wasm")]
+    #[cfg(not(target_family = "wasm"))]
+    fn build(&self, _app: &mut App) {}
+
+    #[cfg(target_family = "wasm")]
+    fn build(&self, app: &mut App) {
         {
             use bevy_blob_loader::BlobLoaderPlugin;
 
@@ -37,14 +37,20 @@ extern "C" {
     fn next_dropped_file() -> Option<Vec<String>>;
 }
 
+#[cfg(target_family = "wasm")]
 fn init_js() {
     init();
 }
 
+#[cfg(target_family = "wasm")]
 fn read_dropped_files(
     mut writer: EventWriter<FileDragAndDrop>,
     windows: Query<Entity, With<Window>>,
 ) {
+    use std::path::Path;
+
+    use bevy_blob_loader::path::serialize_url;
+
     if let Some(vec) = next_dropped_file() {
         let url = &vec[0];
         let ext = &vec[1];
