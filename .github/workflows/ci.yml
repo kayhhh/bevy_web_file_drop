@@ -1,4 +1,4 @@
-name: "CI"
+name: CI
 
 on:
   push:
@@ -17,6 +17,7 @@ jobs:
       - run: nix flake check --all-systems
       - run: nix develop -c cargo doc --workspace --all-features --no-deps --document-private-items
       - run: nix develop -c cargo test --workspace --all-features
+      - run: nix develop -c trunk build
 
   lint:
     runs-on: ubuntu-latest
