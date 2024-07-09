@@ -7,7 +7,13 @@ use plugin::ExamplePlugin;
 
 fn main() {
     App::new()
-        .insert_resource(AssetMetaCheck::Never)
-        .add_plugins((WebFileDropPlugin, DefaultPlugins, ExamplePlugin))
+        .add_plugins((
+            WebFileDropPlugin,
+            DefaultPlugins.set(AssetPlugin {
+                meta_check: AssetMetaCheck::Never,
+                ..default()
+            }),
+            ExamplePlugin,
+        ))
         .run();
 }
