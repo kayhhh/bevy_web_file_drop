@@ -13,7 +13,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.0.5"
+version = "0.0.6"
 edition = "2021"
 repository = "https://github.com/kayhhh/bevy_web_file_drop"
 license = "MIT OR Apache-2.0"
