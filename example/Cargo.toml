@@ -9,6 +9,6 @@ edition.workspace = true
 [dependencies]
 bevy = "0.14.0"
 js-sys = "0.3.66"
-wasm-bindgen = "=0.2.92"
+wasm-bindgen = "0.2.92"
 bevy_web_file_drop = { path = ".." }
 wasm-bindgen-futures = "0.4.39"
