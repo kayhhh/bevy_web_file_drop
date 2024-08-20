@@ -428,9 +428,9 @@ dependencies = [
 
 [[package]]
 name = "bevy_blob_loader"
-version = "0.0.5"
+version = "0.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0bfa1ed33d5fd5ff10b92839e411147a7ffee5d29015f844b4e1c9dc8d437418"
+checksum = "61a8daa1c266ee726272ddb1efa10b80a33d8b15aa1f87f7d2546fdaa2b15b13"
 dependencies = [
  "base64 0.22.1",
  "bevy",
