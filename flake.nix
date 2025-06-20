@@ -86,9 +86,9 @@
         devShells.default = pkgs.mkShell {
           buildInputs =
             (with pkgs; [
+              cargo-edit
               cargo-release
               cargo-watch
-              rust-analyzer
             ])
             ++ [ rustToolchain ]
             ++ build_inputs;

@@ -8,21 +8,19 @@ license.workspace = true
 
 [workspace]
 resolver = "2"
-members = [
-  "example"
-]
+members = ["example"]
 
 [workspace.package]
 version = "0.0.6"
-edition = "2021"
+edition = "2024"
 repository = "https://github.com/kayhhh/bevy_web_file_drop"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-bevy = "0.14.0"
-bevy_blob_loader = "0.0.6"
-js-sys = "0.3.66"
-wasm-bindgen = "0.2.91"
+bevy = "0.16.1"
+bevy_blob_loader = "0.1.0"
+js-sys = "0.3.77"
+wasm-bindgen = "0.2.100"
 
 [profile.dev]
 opt-level = 1
