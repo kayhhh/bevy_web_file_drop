@@ -17,10 +17,10 @@ repository = "https://github.com/kayhhh/bevy_web_file_drop"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-bevy = "0.16.1"
-bevy_blob_loader = "0.1.0"
-js-sys = "0.3.77"
-wasm-bindgen = "0.2.100"
+bevy = "0.17.2"
+bevy_blob_loader = "0.2.0"
+js-sys = "0.3.82"
+wasm-bindgen = "0.2.105"
 
 [profile.dev]
 opt-level = 1

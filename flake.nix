@@ -88,7 +88,7 @@
             (with pkgs; [
               cargo-edit
               cargo-release
-              cargo-watch
+              cargo-nextest
             ])
             ++ [ rustToolchain ]
             ++ build_inputs;
