@@ -63,7 +63,7 @@ fn read_dropped_files(
             let path = Path::new(&serialized);
             let path_buf = path.to_path_buf();
 
-            writer.send(FileDragAndDrop::DroppedFile { window, path_buf });
+            writer.write(FileDragAndDrop::DroppedFile { window, path_buf });
         }
     }
 }
