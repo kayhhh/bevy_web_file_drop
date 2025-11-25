@@ -19,23 +19,22 @@ fn setup(
     mut active_image: ResMut<ActiveImage>,
     mut commands: Commands,
 ) {
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2d);
 
-    let handle = asset_server.load("drip.png");
-    active_image.0 = handle.clone();
+    let image = asset_server.load("drip.png");
+    active_image.0 = image.clone();
 
-    commands.spawn(SpriteBundle {
-        texture: handle,
-        transform: Transform::from_xyz(100., 0., 0.),
-        ..default()
-    });
+    commands.spawn((
+        Sprite { image, ..default() },
+        Transform::from_xyz(100., 0., 0.),
+    ));
 }
 
 /// Read dropped files and update the active image
 fn read_file_drops(
     asset_server: Res<AssetServer>,
     mut active_image: ResMut<ActiveImage>,
-    mut events: EventReader<FileDragAndDrop>,
+    mut events: MessageReader<FileDragAndDrop>,
 ) {
     for event in events.read() {
         if let FileDragAndDrop::DroppedFile { path_buf, .. } = event {
@@ -54,10 +53,10 @@ fn read_file_drops(
 fn set_sprite(
     active_image: Res<ActiveImage>,
     mut commands: Commands,
-    sprites: Query<(Entity, &Handle<Image>), With<Sprite>>,
+    sprites: Query<(Entity, &Sprite)>,
 ) {
-    for (entity, handle) in sprites.iter() {
-        if *handle == active_image.0 {
+    for (entity, sprite) in sprites.iter() {
+        if sprite.image == active_image.0 {
             continue;
         }
 
@@ -65,10 +64,12 @@ fn set_sprite(
 
         commands.entity(entity).despawn();
 
-        commands.spawn(SpriteBundle {
-            texture: active_image.0.clone(),
-            transform: Transform::from_xyz(100., 0., 0.),
-            ..default()
-        });
+        commands.spawn((
+            Sprite {
+                image: active_image.0.clone(),
+                ..default()
+            },
+            Transform::from_xyz(100., 0., 0.),
+        ));
     }
 }

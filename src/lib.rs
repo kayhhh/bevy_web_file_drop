@@ -44,7 +44,7 @@ fn init_js() {
 
 #[cfg(target_family = "wasm")]
 fn read_dropped_files(
-    mut writer: EventWriter<FileDragAndDrop>,
+    mut writer: MessageWriter<FileDragAndDrop>,
     windows: Query<Entity, With<Window>>,
 ) {
     use std::path::Path;
