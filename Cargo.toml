@@ -16,11 +16,15 @@ edition = "2024"
 repository = "https://github.com/kayhhh/bevy_web_file_drop"
 license = "MIT OR Apache-2.0"
 
+[workspace.dependencies]
+js-sys = "0.3.80"
+wasm-bindgen = "0.2.104"
+
 [dependencies]
 bevy = "0.17.2"
 bevy_blob_loader = "0.2.0"
-js-sys = "0.3.82"
-wasm-bindgen = "0.2.105"
+js-sys.workspace = true
+wasm-bindgen.workspace = true
 
 [profile.dev]
 opt-level = 1
